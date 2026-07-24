@@ -397,15 +397,9 @@ required>
 </div>
 
 <div>
-<label>Source du décor</label>
-
-<select name="background_source">
-    <option value="input_image">Conserver le décor de l'image</option>
-    <option value="input_video">Conserver le décor de la vidéo</option>
-</select>
 
     
-<label>Source Personnage de référence (optionnel)</label>
+<label>Video</label>
 
 <input
 type="url"
@@ -425,14 +419,20 @@ placeholder="Exemple : Une jeune femme marche lentement dans une rue de Tokyo de
 </div>
 
 <div>
+<label>Source du décor</label>
 
-<label>Scene Control</label>
+<select name="background_source">
+    <option value="input_image">Conserver le décor de l'image</option>
+    <option value="input_video">Conserver le décor de la vidéo</option>
+</select>
+    
+<label>Personnage identique dans image et vidéo</label>
 
 <select name="scene_mode">
 
-<option value="image">Image</option>
+<option value="image">Non</option>
 
-<option value="video">Video</option>
+<option value="video">Oui</option>
 
 </select>
 
