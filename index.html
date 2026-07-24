@@ -1,0 +1,528 @@
+Ôªø<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shumi AI ‚Ä¢ G√©n√©rateur de vid√©o Kling 2.6</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+
+    min-height:100vh;
+
+    background:
+    radial-gradient(circle at top,#ff6ad533 0%,transparent 30%),
+    radial-gradient(circle at bottom,#ff149355 0%,transparent 30%),
+    linear-gradient(135deg,#09040f,#13091f,#19051d,#0c0718);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:40px;
+
+    overflow-x:hidden;
+
+}
+
+/************ BACKGROUND ************/
+
+body:before{
+
+content:"";
+
+position:fixed;
+
+width:200%;
+height:200%;
+
+background:
+linear-gradient(transparent 49%,rgba(255,255,255,.03) 50%);
+
+background-size:100px 100px;
+
+animation:grid 15s linear infinite;
+
+opacity:.4;
+
+pointer-events:none;
+
+}
+
+@keyframes grid{
+
+from{
+
+transform:translateY(0);
+
+}
+
+to{
+
+transform:translateY(100px);
+
+}
+
+}
+
+/******** CARD ********/
+
+.card{
+
+width:100%;
+max-width:820px;
+
+background:rgba(255,255,255,.07);
+
+backdrop-filter:blur(25px);
+
+border:1px solid rgba(255,255,255,.12);
+
+border-radius:30px;
+
+padding:45px;
+
+box-shadow:
+0 0 40px rgba(255,0,150,.2),
+0 0 120px rgba(255,0,200,.08);
+
+}
+
+/************ TITLE ************/
+
+.logo{
+
+font-size:55px;
+text-align:center;
+
+}
+
+h1{
+
+color:white;
+
+font-size:38px;
+
+margin-top:15px;
+
+text-align:center;
+
+font-weight:700;
+
+}
+
+.subtitle{
+
+margin-top:15px;
+
+color:#ffd5ef;
+
+text-align:center;
+
+line-height:1.7;
+
+font-size:15px;
+
+}
+
+/**********/
+
+.grid{
+
+margin-top:40px;
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:25px;
+
+}
+
+.full{
+
+grid-column:1/-1;
+
+}
+
+label{
+
+display:block;
+
+color:white;
+
+margin-bottom:12px;
+
+font-weight:600;
+
+}
+
+/************ INPUT **********/
+
+input[type=file],
+select,
+textarea{
+
+width:100%;
+
+padding:18px;
+
+background:rgba(255,255,255,.06);
+
+border:1px solid rgba(255,255,255,.1);
+
+border-radius:18px;
+
+color:white;
+
+font-size:15px;
+
+transition:.25s;
+
+}
+
+textarea{
+
+min-height:170px;
+
+resize:vertical;
+
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+
+outline:none;
+
+border-color:#ff4dc4;
+
+box-shadow:0 0 20px rgba(255,0,170,.4);
+
+}
+
+option{
+
+background:#1d1128;
+
+}
+
+/************ BUTTON ************/
+
+button{
+
+margin-top:35px;
+
+width:100%;
+
+padding:20px;
+
+border:none;
+
+border-radius:18px;
+
+cursor:pointer;
+
+font-size:18px;
+
+font-weight:700;
+
+color:white;
+
+background:linear-gradient(90deg,#ff0088,#ff4dc4,#ff7adf);
+
+transition:.3s;
+
+box-shadow:0 10px 35px rgba(255,0,150,.45);
+
+}
+
+button:hover{
+
+transform:translateY(-2px) scale(1.02);
+
+box-shadow:0 15px 40px rgba(255,0,180,.55);
+
+}
+
+/***************/
+
+.progress{
+
+margin-top:25px;
+
+display:none;
+
+}
+
+.progress-bar{
+
+height:10px;
+
+border-radius:30px;
+
+background:#ffffff20;
+
+overflow:hidden;
+
+}
+
+.progress-fill{
+
+height:100%;
+
+width:0;
+
+background:linear-gradient(90deg,#ff0080,#ff66d6);
+
+animation:loading 2s linear infinite;
+
+}
+
+@keyframes loading{
+
+0%{
+
+width:0;
+
+}
+
+100%{
+
+width:100%;
+
+}
+
+}
+
+.status{
+
+margin-top:15px;
+
+text-align:center;
+
+color:#ffd5ef;
+
+}
+
+/************ FOOTER ************/
+
+.footer{
+
+margin-top:35px;
+
+text-align:center;
+
+color:#ffffff80;
+
+font-size:13px;
+
+}
+
+/************ MOBILE ************/
+
+@media(max-width:768px){
+
+.card{
+
+padding:25px;
+
+}
+
+.grid{
+
+grid-template-columns:1fr;
+
+}
+
+h1{
+
+font-size:28px;
+
+}
+
+.logo{
+
+font-size:45px;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="card">
+
+<div class="logo">Ì†ΩÌ≤ñ</div>
+
+<h1>Hello, moi c'est Shumi</h1>
+
+<p class="subtitle">
+
+La petite amie actrice de Marco.<br>
+
+Je vais transformer ton image en une vid√©o IA gr√¢ce √† <b>Kling 2.6</b>.
+
+</p>
+
+<form id="videoForm">
+
+<div class="grid">
+
+<div>
+
+<label>Ì†ΩÌ≥∏ Image</label>
+
+<input
+type="file"
+name="image"
+accept="image/*"
+required>
+
+</div>
+
+<div>
+
+<label>Ì†ºÌæ• Vid√©o de r√©f√©rence (optionnel)</label>
+
+<input
+type="file"
+name="reference_video"
+accept="video/*">
+
+</div>
+
+<div class="full">
+
+<label>‚ú® D√©cris la sc√®ne</label>
+
+<textarea
+name="prompt"
+placeholder="Exemple : Une jeune femme marche lentement dans une rue de Tokyo de nuit, sourit √† la cam√©ra, cheveux port√©s par le vent..."></textarea>
+
+</div>
+
+<div>
+
+<label>Ì†ºÌæ¨ Scene Control</label>
+
+<select name="scene_mode">
+
+<option value="image">Image</option>
+
+<option value="video">Video</option>
+
+</select>
+
+</div>
+
+<div>
+
+<label>Ì†ºÌæûÔ∏è Qualit√©</label>
+
+<select name="quality">
+
+<option>Standard</option>
+
+<option selected>Professional</option>
+
+</select>
+
+</div>
+
+</div>
+
+<button type="submit">
+
+‚ú® G√©n√©rer ma vid√©o IA
+
+</button>
+
+<div class="progress">
+
+<div class="progress-bar">
+
+<div class="progress-fill"></div>
+
+</div>
+
+<div class="status">
+
+Shumi pr√©pare votre vid√©o...
+
+</div>
+
+</div>
+
+</form>
+
+<div class="footer">
+
+Powered by Kling 2.6 ‚Ä¢ Kie.ai ‚Ä¢ n8n
+
+</div>
+
+</div>
+
+<script>
+
+const form=document.getElementById("videoForm");
+
+const progress=document.querySelector(".progress");
+
+form.addEventListener("submit",async(e)=>{
+
+e.preventDefault();
+
+progress.style.display="block";
+
+/***************************************************
+Remplacer cette URL par celle du Webhook n8n
+****************************************************/
+
+const webhook="https://TON-N8N/webhook/shumi";
+
+/**************************************************/
+
+const data=new FormData(form);
+
+try{
+
+const r=await fetch(webhook,{
+method:"POST",
+body:data
+});
+
+const json=await r.json();
+
+alert("Votre demande a √©t√© envoy√©e.");
+
+console.log(json);
+
+}catch(e){
+
+alert("Erreur de connexion avec le serveur.");
+
+}
+
+});
+
+</script>
+
+</body>
+</html>
